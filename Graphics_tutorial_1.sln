@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graphics_tutorial_1", "Graphics_tutorial_1\Graphics_tutorial_1\Graphics_tutorial_1.csproj", "{5413DAE2-F981-41BD-A4A6-C73B8BCC0365}"
+EndProject
+Project("{96E2B04D-8817-42C6-938A-82C39BA4D311}") = "Graphics_tutorial_1Content", "Graphics_tutorial_1\Graphics_tutorial_1Content\Graphics_tutorial_1Content.contentproj", "{14127C0F-AF0D-4A99-9047-AA96186624FF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{E7E3CB23-2A7B-4257-A2A4-6B6FEB9801B7}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x86 = Debug|x86
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5413DAE2-F981-41BD-A4A6-C73B8BCC0365}.Debug|x86.ActiveCfg = Debug|x86
+		{5413DAE2-F981-41BD-A4A6-C73B8BCC0365}.Debug|x86.Build.0 = Debug|x86
+		{5413DAE2-F981-41BD-A4A6-C73B8BCC0365}.Release|x86.ActiveCfg = Release|x86
+		{5413DAE2-F981-41BD-A4A6-C73B8BCC0365}.Release|x86.Build.0 = Release|x86
+		{14127C0F-AF0D-4A99-9047-AA96186624FF}.Debug|x86.ActiveCfg = Debug|x86
+		{14127C0F-AF0D-4A99-9047-AA96186624FF}.Release|x86.ActiveCfg = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
