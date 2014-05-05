@@ -10,6 +10,8 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
 namespace Graphics_tutorial_1
+
+    //TEST
 {
     /// <summary>
     /// This is the main type for your game
