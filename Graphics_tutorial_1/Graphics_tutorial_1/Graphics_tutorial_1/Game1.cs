@@ -97,7 +97,19 @@ namespace Graphics_tutorial_1
         protected override void Update(GameTime gameTime)
         {
             float timeStep = (float)gameTime.ElapsedGameTime.TotalSeconds;
-            this.angle += timeStep * 3.0f; 
+            this.effect.Projection = this.camera.ProjectionMatrix;
+            this.effect.View = this.camera.ViewMatrix;
+            this.effect.World = Matrix.Identity;
+            float deltaAngle = 0;
+            KeyboardState kbState = Keyboard.GetState();
+
+            if (kbState.IsKeyDown(Keys.Left))
+                deltaAngle += -3 * timeStep;
+            if (kbState.IsKeyDown(Keys.Right))
+                deltaAngle += 3 * timeStep;
+
+            if (deltaAngle != 0)
+                this.camera.Eye = Vector3.Transform(this.camera.Eye, Matrix.CreateRotationY(deltaAngle));
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
@@ -130,12 +142,7 @@ namespace Graphics_tutorial_1
 
             this.effect.Projection = this.camera.ProjectionMatrix;
             this.effect.View = this.camera.ViewMatrix;
-
-            Vector3 rotAxis = new Vector3(3 * this.angle, this.angle, 2 * this.angle);
-            rotAxis.Normalize();
-            Matrix translation = Matrix.CreateTranslation(-20.0f / 3.0f, -10.0f / 3.0f, 0);
-            Matrix rotation = Matrix.CreateFromAxisAngle(rotAxis, this.angle);
-            this.effect.World = translation * rotation; 
+            this.effect.World = Matrix.Identity; 
 
             // TODO: Add your drawing code here
             foreach(EffectPass pass in this.effect.CurrentTechnique.Passes)
