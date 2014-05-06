@@ -20,7 +20,8 @@ namespace Graphics_tutorial_1
         SpriteBatch spriteBatch;
         private FrameRateCounter frameRateCounter;
 
-        private Camera camera; 
+        private Camera camera; 
+
         private BasicEffect effect;
         private VertexPositionColor[] vertices;
 
@@ -75,7 +76,8 @@ namespace Graphics_tutorial_1
             this.setupVertices();
             this.effect.VertexColorEnabled = true;
             this.camera = new Camera(new Vector3(0, 0, -50), new Vector3(0, 0, 0),
- new Vector3(0, 1, 0)); 
+ new Vector3(0, 1, 0)); 
+
 
             // TODO: use this.Content to load your game content here
         }
@@ -122,13 +124,15 @@ namespace Graphics_tutorial_1
             this.GraphicsDevice.RasterizerState = new RasterizerState
             {
                 CullMode = CullMode.None
-            }; 
+            }; 
+
 
             GraphicsDevice.Clear(Color.DarkSlateBlue);
 
             this.effect.Projection = this.camera.ProjectionMatrix;
             this.effect.View = this.camera.ViewMatrix;
-            this.effect.World = Matrix.Identity; 
+            this.effect.World = Matrix.Identity; 
+
 
             // TODO: Add your drawing code here
             foreach(EffectPass pass in this.effect.CurrentTechnique.Passes)
