@@ -19,6 +19,7 @@ namespace Graphics_tutorial_1
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         private FrameRateCounter frameRateCounter;
+        private float angle; 
 
         private Camera camera; 
         private BasicEffect effect;
@@ -75,8 +76,7 @@ namespace Graphics_tutorial_1
             this.setupVertices();
             this.effect.VertexColorEnabled = true;
             this.camera = new Camera(new Vector3(0, 0, -50), new Vector3(0, 0, 0),
- new Vector3(0, 1, 0)); 
-
+            new Vector3(0, 1, 0)); 
             // TODO: use this.Content to load your game content here
         }
 
@@ -96,6 +96,8 @@ namespace Graphics_tutorial_1
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Update(GameTime gameTime)
         {
+            float timeStep = (float)gameTime.ElapsedGameTime.TotalSeconds;
+            this.angle += timeStep * 3.0f; 
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
@@ -128,7 +130,8 @@ namespace Graphics_tutorial_1
 
             this.effect.Projection = this.camera.ProjectionMatrix;
             this.effect.View = this.camera.ViewMatrix;
-            this.effect.World = Matrix.Identity; 
+            Matrix rotation = Matrix.CreateRotationY(this.angle);
+            this.effect.World = rotation; 
 
             // TODO: Add your drawing code here
             foreach(EffectPass pass in this.effect.CurrentTechnique.Passes)
