@@ -22,7 +22,7 @@ namespace Graphics_tutorial_1
         SpriteBatch spriteBatch;
         private FrameRateCounter frameRateCounter;
 
-        //effects
+        private Camera camera; 
         private BasicEffect effect;
         private VertexPositionColor[] vertices;
 
@@ -39,17 +39,17 @@ namespace Graphics_tutorial_1
             this.graphics.ApplyChanges();
             this.IsFixedTimeStep = false;
         }
-        private void setupVertices()
-        {
-            this.vertices = new VertexPositionColor[3];
 
-            this.vertices[0].Position = new Vector3(-0.5f, -0.5f, 0f);
+        private void setupVertices() 
+        { 
+            this.vertices = new VertexPositionColor[3]; 
+            this.vertices[0].Position = new Vector3(0f, 0f, 0f); 
             this.vertices[0].Color = Color.Red;
-            this.vertices[1].Position = new Vector3(0f, 0.5f, 0f);
-            this.vertices[1].Color = Color.Yellow;
-            this.vertices[2].Position = new Vector3(0.5f, -0.5f, -0f);
-            this.vertices[2].Color = Color.Green;
-        } 
+            this.vertices[1].Position = new Vector3(10f, 10f, 0f); 
+            this.vertices[1].Color = Color.Yellow; 
+            this.vertices[2].Position = new Vector3(10f, 0f, -5f);
+            this.vertices[2].Color = Color.Green; 
+        }
 
 
         /// <summary>
