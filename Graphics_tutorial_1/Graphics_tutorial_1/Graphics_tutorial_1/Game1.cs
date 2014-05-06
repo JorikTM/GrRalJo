@@ -19,11 +19,34 @@ namespace Graphics_tutorial_1
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         private FrameRateCounter frameRateCounter;
-        private float angle; 
+        private float[,] heightData;
+        private float angle;
+        private Terrain terrain;
 
-        private Camera camera; 
+        private Camera camera;
+
         private BasicEffect effect;
         private VertexPositionColor[] vertices;
+
+        //private void loadHeightData()
+        //{
+        //    this.heightData = new float[4, 3];
+
+        //    this.heightData[0, 0] = 0;
+        //    this.heightData[1, 0] = 0;
+        //    this.heightData[2, 0] = 0;
+        //    this.heightData[3, 0] = 0;
+
+        //    this.heightData[0, 1] = 0.5f;
+        //    this.heightData[1, 1] = 0;
+        //    this.heightData[2, 1] = -1.0f;
+        //    this.heightData[3, 1] = 0.2f;
+
+        //    this.heightData[0, 2] = 1.0f;
+        //    this.heightData[1, 2] = 1.2f;
+        //    this.heightData[2, 2] = 0.8f;
+        //    this.heightData[3, 2] = 0;
+        //}
 
         public Game1()
         {
@@ -38,18 +61,6 @@ namespace Graphics_tutorial_1
             this.graphics.ApplyChanges();
             this.IsFixedTimeStep = false;
         }
-
-        private void setupVertices()
-        {
-            this.vertices = new VertexPositionColor[3];
-            this.vertices[0].Position = new Vector3(0f, 0f, 0f); 
-            this.vertices[0].Color = Color.Red;
-            this.vertices[1].Position = new Vector3(10f, 10f, 0f); 
-            this.vertices[1].Color = Color.Yellow;
-            this.vertices[2].Position = new Vector3(10f, 0f, -5f);
-            this.vertices[2].Color = Color.Green;
-        } 
-
 
         /// <summary>
         /// Allows the game to perform any initialization it needs to before starting to run.
@@ -71,12 +82,18 @@ namespace Graphics_tutorial_1
         protected override void LoadContent()
         {
             // Create a new SpriteBatch, which can be used to draw textures.
+          // Texture2D map = Content.Load<Texture2D>("heightmap"); 
             spriteBatch = new SpriteBatch(GraphicsDevice);
             this.effect = new BasicEffect(this.GraphicsDevice);
-            this.setupVertices();
+            //this.loadHeightData();
+
+            Texture2D map = Content.Load<Texture2D>("heightmap");
+            this.terrain = new Terrain(new HeightMap(map), 0.2f);
+
             this.effect.VertexColorEnabled = true;
-            this.camera = new Camera(new Vector3(0, 0, -50), new Vector3(0, 0, 0),
-            new Vector3(0, 1, 0)); 
+            this.camera = new Camera(new Vector3(0, 10, 0), new Vector3(0, 0, 0),
+     new Vector3(0, 0, -1));
+
             // TODO: use this.Content to load your game content here
         }
 
@@ -109,17 +126,18 @@ namespace Graphics_tutorial_1
                 deltaAngle += 3 * timeStep;
 
             if (deltaAngle != 0)
-                this.camera.Eye = Vector3.Transform(this.camera.Eye, Matrix.CreateRotationY(deltaAngle));
+                this.camera.Eye = Vector3.Transform(this.camera.Eye, Matrix.CreateRotationY(deltaAngle));
+
             // Allows the game to exit
             if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed)
                 this.Exit();
             KeyboardState testkeyboardstate = Keyboard.GetState();
-            
-            if(testkeyboardstate.IsKeyDown(Keys.Escape))
+
+            if (testkeyboardstate.IsKeyDown(Keys.Escape))
             {
                 this.Exit();
             }
-          
+
 
             // TODO: Add your update logic here
             this.Window.Title = "graphics Tutorial | FPS: " + this.frameRateCounter.FrameRate;
@@ -135,21 +153,23 @@ namespace Graphics_tutorial_1
         {
             this.GraphicsDevice.RasterizerState = new RasterizerState
             {
-                CullMode = CullMode.None
-            }; 
+                CullMode = CullMode.None,
+                FillMode = FillMode.WireFrame
+            };
 
             GraphicsDevice.Clear(Color.DarkSlateBlue);
 
             this.effect.Projection = this.camera.ProjectionMatrix;
             this.effect.View = this.camera.ViewMatrix;
-            this.effect.World = Matrix.Identity; 
+            Matrix translation = Matrix.CreateTranslation(-0.5f * this.terrain.Width, 0,
+  0.5f * this.terrain.Width);
+            this.effect.World = translation; 
 
             // TODO: Add your drawing code here
-            foreach(EffectPass pass in this.effect.CurrentTechnique.Passes)
+            foreach (EffectPass pass in this.effect.CurrentTechnique.Passes)
             {
                 pass.Apply();
-                this.GraphicsDevice.DrawUserPrimitives(PrimitiveType.TriangleList, this.vertices, 0, 1,
- VertexPositionColor.VertexDeclaration); 
+                this.terrain.Draw(this.GraphicsDevice);
 
 
             }
