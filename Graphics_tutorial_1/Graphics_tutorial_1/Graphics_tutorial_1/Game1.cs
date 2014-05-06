@@ -28,25 +28,25 @@ namespace Graphics_tutorial_1
         private BasicEffect effect;
         private VertexPositionColor[] vertices;
 
-        //private void loadHeightData()
-        //{
-        //    this.heightData = new float[4, 3];
+        private void loadHeightData()
+        {
+            this.heightData = new float[4, 3];
 
-        //    this.heightData[0, 0] = 0;
-        //    this.heightData[1, 0] = 0;
-        //    this.heightData[2, 0] = 0;
-        //    this.heightData[3, 0] = 0;
+            this.heightData[0, 0] = 0;
+            this.heightData[1, 0] = 0;
+            this.heightData[2, 0] = 0;
+            this.heightData[3, 0] = 0;
 
-        //    this.heightData[0, 1] = 0.5f;
-        //    this.heightData[1, 1] = 0;
-        //    this.heightData[2, 1] = -1.0f;
-        //    this.heightData[3, 1] = 0.2f;
+            this.heightData[0, 1] = 0.5f;
+            this.heightData[1, 1] = 0;
+            this.heightData[2, 1] = -1.0f;
+            this.heightData[3, 1] = 0.2f;
 
-        //    this.heightData[0, 2] = 1.0f;
-        //    this.heightData[1, 2] = 1.2f;
-        //    this.heightData[2, 2] = 0.8f;
-        //    this.heightData[3, 2] = 0;
-        //}
+            this.heightData[0, 2] = 1.0f;
+            this.heightData[1, 2] = 1.2f;
+            this.heightData[2, 2] = 0.8f;
+            this.heightData[3, 2] = 0;
+        }
 
         public Game1()
         {
@@ -163,7 +163,8 @@ namespace Graphics_tutorial_1
             this.effect.View = this.camera.ViewMatrix;
             Matrix translation = Matrix.CreateTranslation(-0.5f * this.terrain.Width, 0,
   0.5f * this.terrain.Width);
-            this.effect.World = translation; 
+            this.effect.World = translation; 
+
 
             // TODO: Add your drawing code here
             foreach (EffectPass pass in this.effect.CurrentTechnique.Passes)
