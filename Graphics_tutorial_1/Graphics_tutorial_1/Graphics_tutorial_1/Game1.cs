@@ -19,9 +19,11 @@ namespace Graphics_tutorial_1
         GraphicsDeviceManager graphics;
         SpriteBatch spriteBatch;
         private FrameRateCounter frameRateCounter;
-        private float angle; 
+        private float angle; 
 
-        private Camera camera; 
+
+        private Camera camera; 
+
         private BasicEffect effect;
         private VertexPositionColor[] vertices;
 
@@ -124,7 +126,8 @@ namespace Graphics_tutorial_1
             this.GraphicsDevice.RasterizerState = new RasterizerState
             {
                 CullMode = CullMode.None
-            }; 
+            }; 
+
 
             GraphicsDevice.Clear(Color.DarkSlateBlue);
 
@@ -135,7 +138,11 @@ namespace Graphics_tutorial_1
             rotAxis.Normalize();
             Matrix translation = Matrix.CreateTranslation(-20.0f / 3.0f, -10.0f / 3.0f, 0);
             Matrix rotation = Matrix.CreateFromAxisAngle(rotAxis, this.angle);
-            this.effect.World = translation * rotation; 
+            this.effect.World = translation * rotation; 
+
+
+
+
 
             // TODO: Add your drawing code here
             foreach(EffectPass pass in this.effect.CurrentTechnique.Passes)
