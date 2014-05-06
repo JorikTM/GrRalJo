@@ -10,8 +10,6 @@ using Microsoft.Xna.Framework.Input;
 using Microsoft.Xna.Framework.Media;
 
 namespace Graphics_tutorial_1
-
-    //TEST
 {
     /// <summary>
     /// This is the main type for your game
@@ -22,8 +20,7 @@ namespace Graphics_tutorial_1
         SpriteBatch spriteBatch;
         private FrameRateCounter frameRateCounter;
 
-        private Camera camera; 
-
+        private Camera camera; 
         private BasicEffect effect;
         private VertexPositionColor[] vertices;
 
@@ -41,16 +38,16 @@ namespace Graphics_tutorial_1
             this.IsFixedTimeStep = false;
         }
 
-        private void setupVertices() 
-        { 
-            this.vertices = new VertexPositionColor[3]; 
+        private void setupVertices()
+        {
+            this.vertices = new VertexPositionColor[3];
             this.vertices[0].Position = new Vector3(0f, 0f, 0f); 
             this.vertices[0].Color = Color.Red;
             this.vertices[1].Position = new Vector3(10f, 10f, 0f); 
-            this.vertices[1].Color = Color.Yellow; 
+            this.vertices[1].Color = Color.Yellow;
             this.vertices[2].Position = new Vector3(10f, 0f, -5f);
-            this.vertices[2].Color = Color.Green; 
-        }
+            this.vertices[2].Color = Color.Green;
+        } 
 
 
         /// <summary>
@@ -77,6 +74,8 @@ namespace Graphics_tutorial_1
             this.effect = new BasicEffect(this.GraphicsDevice);
             this.setupVertices();
             this.effect.VertexColorEnabled = true;
+            this.camera = new Camera(new Vector3(0, 0, -50), new Vector3(0, 0, 0),
+ new Vector3(0, 1, 0)); 
 
             // TODO: use this.Content to load your game content here
         }
@@ -120,7 +119,16 @@ namespace Graphics_tutorial_1
         /// <param name="gameTime">Provides a snapshot of timing values.</param>
         protected override void Draw(GameTime gameTime)
         {
+            this.GraphicsDevice.RasterizerState = new RasterizerState
+            {
+                CullMode = CullMode.None
+            }; 
+
             GraphicsDevice.Clear(Color.DarkSlateBlue);
+
+            this.effect.Projection = this.camera.ProjectionMatrix;
+            this.effect.View = this.camera.ViewMatrix;
+            this.effect.World = Matrix.Identity; 
 
             // TODO: Add your drawing code here
             foreach(EffectPass pass in this.effect.CurrentTechnique.Passes)
