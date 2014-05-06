@@ -130,8 +130,12 @@ namespace Graphics_tutorial_1
 
             this.effect.Projection = this.camera.ProjectionMatrix;
             this.effect.View = this.camera.ViewMatrix;
-            Matrix rotation = Matrix.CreateRotationY(this.angle);
-            this.effect.World = rotation; 
+
+            Vector3 rotAxis = new Vector3(3 * this.angle, this.angle, 2 * this.angle);
+            rotAxis.Normalize();
+            Matrix translation = Matrix.CreateTranslation(-20.0f / 3.0f, -10.0f / 3.0f, 0);
+            Matrix rotation = Matrix.CreateFromAxisAngle(rotAxis, this.angle);
+            this.effect.World = translation * rotation; 
 
             // TODO: Add your drawing code here
             foreach(EffectPass pass in this.effect.CurrentTechnique.Passes)
