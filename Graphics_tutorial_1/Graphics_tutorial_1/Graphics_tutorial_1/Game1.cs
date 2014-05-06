@@ -22,7 +22,8 @@ namespace Graphics_tutorial_1
         SpriteBatch spriteBatch;
         private FrameRateCounter frameRateCounter;
 
-        private Camera camera; 
+        private Camera camera; 
+
         private BasicEffect effect;
         private VertexPositionColor[] vertices;
 
